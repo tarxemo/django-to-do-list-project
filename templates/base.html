@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static tailwind_tags %}
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-900 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-yellow-500">Django Todo App</h1>
+                <div class="flex space-x-4">
+                    {% if user.is_authenticated %}
+                        <span class="text-gray-300">Hello, {{ user.username }}</span>
+                        <a href="{% url 'logout_user' %}" class="text-yellow-500 hover:text-yellow-400">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-yellow-500 hover:text-yellow-400">Login</a>
+                        <a href="{% url 'signup' %}" class="text-yellow-500 hover:text-yellow-400">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>
